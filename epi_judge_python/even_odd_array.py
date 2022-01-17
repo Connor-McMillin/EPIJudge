@@ -8,9 +8,23 @@ from test_framework.test_utils import enable_executor_hook
 
 
 def even_odd(A: List[int]) -> None:
-    # TODO - you fill in here.
+    even_index = 0
+    odd_index = len(A) - 1
+
+    while even_index < odd_index:
+        if A[even_index] % 2 == 0:
+            even_index += 1
+        else:
+            swap(even_index, odd_index, A)
+            odd_index -= 1
+
     return
 
+def swap(i: int, j: int, A: List[int]) -> None:
+    if i != j:
+        temp = A[i]
+        A[i] = A[j]
+        A[j] = temp
 
 @enable_executor_hook
 def even_odd_wrapper(executor, A):
