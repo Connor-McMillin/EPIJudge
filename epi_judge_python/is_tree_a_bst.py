@@ -3,9 +3,15 @@ from test_framework import generic_test
 
 
 def is_binary_tree_bst(tree: BinaryTreeNode) -> bool:
-    # TODO - you fill in here.
-    return True
+    return solve(float('-inf'), float('inf'), tree)
 
+def solve(left: int, right: int, tree: BinaryTreeNode) -> bool:
+    if tree == None:
+        return True
+    elif left <= tree.data and tree.data <= right:
+        return solve(left, tree.data, tree.left) and solve(tree.data, right, tree.right)
+    else:
+        return False
 
 if __name__ == '__main__':
     exit(
