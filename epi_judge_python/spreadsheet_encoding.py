@@ -2,8 +2,12 @@ from test_framework import generic_test
 
 
 def ss_decode_col_id(col: str) -> int:
-    # TODO - you fill in here.
-    return 0
+    result = 0
+
+    for power, letter in enumerate(col[::-1]):
+        result += (1 + ord(letter) - ord('A')) * pow(26, power)
+
+    return result
 
 
 if __name__ == '__main__':
