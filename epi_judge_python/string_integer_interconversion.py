@@ -3,13 +3,40 @@ from test_framework.test_failure import TestFailure
 
 
 def int_to_string(x: int) -> str:
-    # TODO - you fill in here.
-    return '0'
+    if x == 0:
+        return "0"
 
+    set_negative = x < 0
+
+    if set_negative:
+        x *= -1
+
+    result = ""
+
+    while x > 0:
+        to_add = x % 10
+        x = x // 10
+        result = str(to_add) + result
+
+    if set_negative:
+        return "-" + result
+    else:
+        return  result
 
 def string_to_int(s: str) -> int:
-    # TODO - you fill in here.
-    return 0
+    result = 0
+
+    set_negative = s.startswith("-")
+    s = s.strip('+-')
+
+    for num in s:
+        result *= 10
+        result += ord(num) - ord("0")
+
+    if set_negative:
+        return result * -1
+    else:
+        return result
 
 
 def wrapper(x, s):
