@@ -2,9 +2,9 @@ from test_framework import generic_test
 
 
 def closest_int_same_bit_count(x: int) -> int:
-    # TODO - you fill in here.
-    return 0
-
+    lowest_set = (x & ~(x-1)) if (x & 1 == 0) else ((x+1) & ~(x))
+    mask = lowest_set | (lowest_set >> 1)
+    return x ^ mask
 
 if __name__ == '__main__':
     exit(
