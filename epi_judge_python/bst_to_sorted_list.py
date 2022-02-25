@@ -8,9 +8,33 @@ from test_framework.test_utils import enable_executor_hook
 
 
 def bst_to_doubly_linked_list(tree: BstNode) -> Optional[BstNode]:
-    # TODO - you fill in here.
-    return None
+    def rec_bst_to_doubly_linked_list(current: BstNode) -> (Optional[BstNode], Optional[BstNode]):
+        if current == None or current.data == None:
+            return (None, None)
 
+        left_head, left_tail = rec_bst_to_doubly_linked_list(current.left)
+        right_head, right_tail = rec_bst_to_doubly_linked_list(current.right)
+        
+        if left_tail:
+            left_tail.right = current
+        current.left = left_tail
+
+        current.right = right_head
+        if right_head:
+            right_head.left = current
+
+        return (left_head or current, right_tail or current)
+
+    lst_head, lst_tail = rec_bst_to_doubly_linked_list(tree)
+
+    return lst_head
+
+def print_list(tree: BstNode) -> None:
+    while (tree != None and tree.data != None):
+        print("{} -> ".format(tree.data), end="")
+        tree = tree.right
+
+    print("None")
 
 @enable_executor_hook
 def bst_to_doubly_linked_list_wrapper(executor, tree):
