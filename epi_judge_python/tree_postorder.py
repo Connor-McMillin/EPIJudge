@@ -5,8 +5,13 @@ from test_framework import generic_test
 
 
 def postorder_traversal(tree: BinaryTreeNode) -> List[int]:
-    # TODO - you fill in here.
-    return []
+    if not tree:
+        return []
+
+    left_list = postorder_traversal(tree.left)
+    right_list = postorder_traversal(tree.right)
+
+    return left_list + right_list + [tree.data]
 
 
 if __name__ == '__main__':
